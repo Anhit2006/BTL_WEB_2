@@ -1,49 +1,134 @@
+
+:root {
+    --color-primary-dark: #457b9d; 
+    --color-primary-light: #a8dadc; 
+    --color-accent: #ff69b4;       
+    --color-text-dark: #333;       
+    --color-text-muted: #495057;   
+    --color-danger: #e74c3c;
+    --color-secondary-bg: #f4f7fa; 
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --radius-sm: 8px;
+}
+
+/*  Trang Chung  */
+
+.orders-page .search-bar.order-search-bar input {
+    width: 100%;
+    max-width: 400px;
+}
+
+/*  nút hành động  */
 .orders-page .action-buttons {
-  display: flex;
-  gap: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    white-space: nowrap; 
 }
 
 .orders-page .action-buttons .btn {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem; 
+    font-weight: 500;
 }
 
-.modal-large {
-  max-width: 800px;
+
+/*  Modal Layout  */
+
+.modal-overlay .modal-form {
+    max-width: 750px; 
+}
+.modal-overlay .modal-details {
+    max-width: 850px; 
 }
 
-.product-item-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  gap: 0.5rem;
-}
+
+/*  Chi tiết Đơn hàng -Modal */
 
 .order-details {
-  padding: 1rem 0;
+    padding: 1rem 0;
 }
 
-.detail-row {
-  margin-bottom: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+.order-details .detail-row {
+    margin-bottom: var(--spacing-xs);
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed #e0e0e0; 
+    font-size: 0.95rem;
 }
 
-.detail-row strong {
-  display: inline-block;
-  width: 150px;
-  color: #333;
+.order-details .detail-row strong {
+    display: inline-block;
+    width: 150px; 
+    color: var(--color-primary-dark);
+    font-weight: 600;
 }
 
-.detail-section {
-  margin-top: 1.5rem;
+.order-details .detail-section {
+    margin-top: 2rem;
 }
 
-.detail-section table {
-  width: 100%;
+.order-details .detail-section table {
+    width: 100%;
 }
 
-.detail-section tfoot {
-  background-color: #f8f9fa;
+/* chân bảng  */
+.order-details .detail-section tfoot {
+    background-color: var(--color-secondary-bg);
+    border-top: 2px solid var(--color-primary-light);
+    font-size: 1.05rem;
 }
 
+.order-details .detail-section tfoot td {
+    padding: 1rem var(--spacing-sm);
+}
+
+
+/*  Product List */
+
+.product-item-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+    gap: var(--spacing-xs);
+}
+
+/* Tối ưu hóa kích thước  */
+.product-item-row select,
+.product-item-row input[type="number"] {
+    padding: 0.6rem;
+    height: 40px; 
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+}
+
+/* cột hiển thị tạm tính/tồn kho */
+.product-item-row .item-sub-info {
+    flex-shrink: 0;
+    min-width: 120px; 
+    text-align: right;
+    padding-right: 0.5rem;
+    font-weight: 600;
+    color: var(--color-danger);
+    font-size: 0.95rem;
+}
+
+/*  hàng thêm sản phẩm và tổng tiền tạm tính */
+.add-product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.total-amount-display {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.total-amount-display span {
+    color: var(--color-danger); 
+    font-size: 1.2rem;
+}

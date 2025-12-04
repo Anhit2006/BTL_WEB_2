@@ -7,7 +7,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [showHidden, setShowHidden] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Vẫn dùng state này
   const [editingProduct, setEditingProduct] = useState(null);
   const [formData, setFormData] = useState({
     ten_sp: '',
@@ -20,7 +20,7 @@ const Products = () => {
 
 
 
- useEffect(() => {
+  useEffect(() => {
     loadProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, showHidden]);
@@ -44,6 +44,7 @@ const Products = () => {
     setTimeout(() => setAlert({ type: '', message: '' }), 3000);
   };
 
+  // Hàm mở Modal 
   const handleOpenModal = (product = null) => {
     if (product) {
       setEditingProduct(product);
@@ -64,7 +65,7 @@ const Products = () => {
         anh: '',
       });
     }
-    setShowModal(true);
+    setShowModal(true); 
   };
 
   const handleCloseModal = () => {
@@ -140,7 +141,11 @@ const Products = () => {
       <div className="card">
         <div className="card-header">
           <h2>Quản Lý Sản Phẩm</h2>
-          <button className="btn btn-primary" onClick={() => handleOpenModal()}>
+          <button 
+            className="btn" 
+            style={{ backgroundColor: '#ff69b4', color: 'white' }} 
+            onClick={() => handleOpenModal()}
+          >
             + Thêm Sản Phẩm
           </button>
         </div>
@@ -154,18 +159,22 @@ const Products = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Tìm kiếm sản phẩm..."
+            placeholder="Tìm kiếm sản phẩm (Mã, Tên)..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <label style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <input
-              type="checkbox"
-              checked={showHidden}
-              onChange={(e) => setShowHidden(e.target.checked)}
-            />
-            Hiển thị sản phẩm đã ẩn
-          </label>
+          
+          <div className="toggle-switch-group"> 
+            <label className="toggle-switch-label">Hiển thị SP đã ẩn</label>
+            <label className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={showHidden}
+                onChange={(e) => setShowHidden(e.target.checked)}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
         </div>
 
         <div className="table-container">
@@ -177,56 +186,58 @@ const Products = () => {
                 <th>Giá Bán</th>
                 <th>Tồn Kho</th>
                 <th>Trạng Thái</th>
-                <th>Thao Tác</th>
+                <th style={{ width: '120px', textAlign: 'center' }}>Thao Tác</th> 
               </tr>
             </thead>
             <tbody>
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center', padding: '2rem' }}>
-                    Không có sản phẩm nào
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                    Không có sản phẩm nào được tìm thấy.
                   </td>
                 </tr>
               ) : (
                 products.map((product) => (
                   <tr key={product.ma_sp} style={{ opacity: product.trang_thai === 0 ? 0.6 : 1 }}>
-                    <td>{product.ma_sp}</td>
-                    <td>{product.ten_sp}</td>
-                    <td>{parseInt(product.gia_ban).toLocaleString('vi-VN')} đ</td>
                     <td>
-                      <span style={{ 
-                        color: product.so_luong_ton < 10 ? '#e74c3c' : product.so_luong_ton < 50 ? '#f39c12' : '#27ae60',
-                        fontWeight: 'bold'
-                      }}>
+                      {product.ma_sp.length > 20 ? product.ma_sp.substring(0, 15) + '...' : product.ma_sp}
+                    </td> 
+                    <td>{product.ten_sp}</td>
+                    <td>{parseInt(product.gia_ban).toLocaleString('vi-VN')} ₫</td> 
+                    <td>
+                      <span className={
+                        product.so_luong_ton < 10 ? 'out-of-stock' : product.so_luong_ton < 50 ? 'low-stock' : ''
+                      }>
                         {product.so_luong_ton}
                       </span>
                     </td>
                     <td>
                       <span className={`badge ${product.trang_thai === 1 ? 'badge-success' : 'badge-danger'}`}>
-                        {product.trang_thai === 1 ? 'Hiển thị' : 'Ẩn'}
+                        {product.trang_thai === 1 ? 'HIỂN THỊ' : 'ĐÃ ẨN'}
                       </span>
                     </td>
-                    <td>
-                      <div className="action-buttons">
+                    <td style={{ textAlign: 'center' }}>
+                      <div className="action-icons"> 
                         <button
-                          className="btn btn-warning"
+                          className="btn-icon btn-warning-soft"
+                          title="Sửa"
                           onClick={() => handleOpenModal(product)}
-                          style={{ marginRight: '0.5rem' }}
                         >
-                          Sửa
+                          ✏️
                         </button>
                         <button
-                          className="btn btn-secondary"
+                          className={`btn-icon ${product.trang_thai === 1 ? 'btn-secondary-soft' : 'btn-success-soft'}`}
+                          title={product.trang_thai === 1 ? 'Ẩn sản phẩm' : 'Hiện sản phẩm'}
                           onClick={() => handleToggleVisibility(product)}
-                          style={{ marginRight: '0.5rem' }}
                         >
-                          {product.trang_thai === 1 ? 'Ẩn' : 'Hiện'}
+                          {product.trang_thai === 1 ? '👁️‍🗨️' : '👁️'}
                         </button>
                         <button
-                          className="btn btn-danger"
+                          className="btn-icon btn-danger-soft"
+                          title="Xóa"
                           onClick={() => handleDelete(product)}
                         >
-                          Xóa
+                          🗑️
                         </button>
                       </div>
                     </td>
@@ -240,6 +251,7 @@ const Products = () => {
 
       {showModal && (
         <div className="modal-overlay" onClick={handleCloseModal}>
+      
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>{editingProduct ? 'Sửa Sản Phẩm' : 'Thêm Sản Phẩm'}</h3>
@@ -319,7 +331,8 @@ const Products = () => {
                 <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>
                   Hủy
                 </button>
-                <button type="submit" className="btn btn-primary">
+                
+                <button type="submit" className="btn btn-primary-modal">
                   {editingProduct ? 'Cập Nhật' : 'Thêm'}
                 </button>
               </div>

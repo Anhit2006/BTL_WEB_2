@@ -1,11 +1,129 @@
-.products-page .action-buttons {
+
+
+.products-page .action-icons {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.3rem; 
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.products-page .action-buttons .btn {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
+/*  tồn kho */
+.low-stock {
+    color: #e67e22; 
+    font-weight: 700;
+}
+.out-of-stock {
+    color: #c0392b; 
+    font-weight: 700;
 }
 
+/* Toggle Switch Style */
+.toggle-switch-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-switch-label {
+    font-size: 0.95rem;
+    color: #495057;
+    margin-right: 5px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*  khi bật */
+input:checked + .slider {
+    background-color: #a8dadc; 
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #a8dadc;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 25px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Icon Buttons  */
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.15rem; 
+    padding: 0.4rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    line-height: 1; 
+}
+
+/*  màu nền  */
+.btn-warning-soft:hover {
+    background-color: #fff8e1;
+}
+
+.btn-danger-soft:hover {
+    background-color: #ffe9e9;
+}
+
+.btn-secondary-soft:hover {
+    background-color: #f0f3f6;
+}
+.btn-success-soft:hover {
+    background-color: #e6f7ef;
+}
+
+/*  ô tìm kiếm trong Products.js */
+.search-bar input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.7rem;
+  padding-left: 2.5rem; 
+  background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23457b9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 0.8rem center;
+  background-size: 18px;
+  border-radius: 20px; 
+  border: 1px solid #e0e0e0;
+}

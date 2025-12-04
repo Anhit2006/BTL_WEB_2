@@ -3,11 +3,15 @@ const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const SECRET_KEY = 'mat_khau_bi_mat_cua_ban'; // Nên đưa vào file .env
+const SECRET_KEY = process.env.SECRET_KEY || 'mat_khau_bi_mat_cua_ban'; // Prefer from .env
 
 exports.register = async (req, res) => {
   try {
     const { username, password, full_name } = req.body;
+
+    if (!username || !password) {
+      return res.status(400).json({ success: false, error: 'Username và password là bắt buộc' });
+    }
 
     // Kiểm tra user tồn tại
     const [existing] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);

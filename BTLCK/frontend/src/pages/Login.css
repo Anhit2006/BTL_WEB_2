@@ -1,0 +1,129 @@
+/*  Container Login  */
+
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9fbfd; 
+}
+
+.login-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); 
+    width: 100%;
+    max-width: 450px; 
+    transition: transform 0.3s;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #457b9d; 
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/*  Form Groups  */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 8px; 
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #a8dadc; 
+    box-shadow: 0 0 0 3px rgba(168, 218, 220, 0.5); 
+}
+
+/*  Button Submit  */
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background-color: #457b9d; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s, transform 0.1s;
+    letter-spacing: 0.5px;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background-color: #386786;
+    transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/*  Alerts  */
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-left: 5px solid;
+}
+
+.alert-error {
+    background-color: #ffe8ee; 
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.alert-success {
+    background-color: #e6f7ef; 
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+/*  Switch Mode  */
+.switch-mode {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.btn-switch {
+    background: none;
+    border: none;
+    
+    color: #457b9d; 
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: underline;
+    transition: color 0.2s;
+    padding: 0 4px; 
+}
+
+.btn-switch:hover {
+    color: #2a5875;
+}
