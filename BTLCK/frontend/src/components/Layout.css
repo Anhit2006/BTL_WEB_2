@@ -1,6 +1,4 @@
-
-
-/* -- Khởi tạo chung (Base) -- */
+/* --- Base Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -10,16 +8,16 @@
 /* CSS Variables */
 :root {
     /* Color Palette */
-    --color-primary-dark: #457b9d;     /* Navbar */
-    --color-primary-light: #a8dadc;    /* Button  */
-    --color-accent: #ff69b4;           /* Điểm nhấn */
-    --color-background: #f1faee;       /* Nền */
-    --color-text-dark: #333;           /* Chữ chính */
-    --color-text-muted: #495057;       /* Chữ phụ */
-    --color-border: #e0e0e0;           /*  viền */
-    --color-card-bg: white;
-    --color-hover-bg: #f8fafd;         
-
+    --color-primary-dark: #457b9d; 
+    --color-primary-light: #a8dadc; 
+    --color-accent: #ff69b4; 
+    --color-background: #f1faee; 
+    --color-text-dark: #333; 
+    --color-text-muted: #495057; 
+    --color-border: #e0e0e0; 
+    --color-card-bg: #ffffff;
+    --color-hover-bg: #f8fafd; 
+    
     /* Typography */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-size-base: 1rem;
@@ -31,15 +29,18 @@
     --spacing-lg: 2rem;
     --spacing-xl: 2.5rem;
 
-    /*  Radius */
+    /* Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
 
     /* Shadow */
     --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+    --shadow-neumorphic: 
+        0 8px 30px rgba(0, 0, 0, 0.08), 
+        0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 body {
@@ -55,7 +56,7 @@ body {
     flex-direction: column;
 }
 
-/* - Menu  */
+/* --- Navigation Bar --- */
 .navbar {
     display: flex;
     align-items: center;
@@ -127,7 +128,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Main */
+/* --- Main Content --- */
 .main-content {
     flex: 1;
     padding: var(--spacing-lg);
@@ -136,7 +137,7 @@ body {
     margin: 0 auto;
 }
 
-/* Button */
+/* --- Buttons --- */
 .btn {
     padding: 0.6rem 1.2rem;
     border: none;
@@ -201,7 +202,7 @@ body {
 }
 .btn-secondary:hover { background-color: #95a5a6; }
 
-/* Card*/
+/* --- Cards ---*/
 .card {
     background: var(--color-card-bg);
     border-radius: var(--radius-lg); 
@@ -227,19 +228,21 @@ body {
     margin: 0;
 }
 
-/*  Form  */
+/* --- Forms --- */
 .form-group {
     margin-bottom: var(--spacing-sm);
 }
 
+/* Modal Label Style (White on dark background) */
 .form-group label {
     display: block;
     margin-bottom: 0.4rem;
     font-size: 0.95rem;
-    color: var(--color-text-muted);
+    color: white; 
     font-weight: 500;
 }
 
+/* Modal Input Style (Solid white background) */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -250,7 +253,8 @@ body {
     font-size: 0.95rem;
     transition: border-color 0.3s, box-shadow 0.3s;
     font-family: var(--font-family);
-    background-color: white;
+    background-color: white !important; /* Forces solid white background */
+    color: var(--color-text-dark); 
 }
 
 .form-group input:focus,
@@ -261,7 +265,7 @@ body {
     box-shadow: 0 0 0 3px rgba(69, 123, 157, 0.2); 
 }
 
-/* Table */
+/* --- Table --- */
 .table-container {
     overflow-x: auto;
     background: var(--color-card-bg);
@@ -295,7 +299,7 @@ tbody tr:hover {
     background-color: var(--color-hover-bg);
 }
 
-/* Bo tròn góc Table */
+/* Table border radius correction */
 table th:first-child,
 table td:first-child {
     padding-left: var(--spacing-lg);
@@ -306,11 +310,11 @@ table td:last-child {
 }
 
 
-/* Search Bar */
+/* --- Search Bar --- */
 .search-bar {
     display: flex;
     gap: var(--spacing-md); 
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-mdz);
     flex-wrap: wrap;
     align-items: center;
 }
@@ -320,29 +324,37 @@ table td:last-child {
     flex-grow: 1;
 }
 
-/*  Modal  */
+/* --- Modal --- */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.45);
+    
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    backdrop-filter: blur(3px); 
     z-index: 1000;
 }
 
 .modal {
-    background: var(--color-card-bg);
+    
+    background: white !important; 
+    color: var(--color-text-dark); 
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     max-width: 650px;
     width: 90%;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6); 
+    opacity: 1; 
+    border: 3px solid var(--color-primary-dark); 
     max-height: 90vh;
     overflow-y: auto;
+    transition: all 0.3s ease-out;
 }
 
 .modal-header {
@@ -351,12 +363,16 @@ table td:last-child {
     align-items: center;
     margin-bottom: var(--spacing-md);
     padding-bottom: var(--spacing-sm);
-    border-bottom: 1px solid #e9ecef;
+    /* QUAN TRỌNG: Buộc nền header là TRẮNG */
+    background-color: white !important; 
+    /* Viền header màu xám nhạt */
+    border-bottom: 1px solid var(--color-border);
 }
-
 .modal-header h3 {
     font-size: 1.4rem;
     margin: 0;
+    /* Tiêu đề màu đen */
+    color: var(--color-text-dark); 
 }
 
 .close-btn {
@@ -364,13 +380,14 @@ table td:last-child {
     border: none;
     font-size: 2rem;
     line-height: 1;
-    color: var(--color-text-muted);
+    /* Nút đóng màu đen */
+    color: var(--color-text-dark); 
     cursor: pointer;
     padding: 0;
     transition: color 0.2s;
 }
 .close-btn:hover {
-    color: var(--color-text-dark);
+    color: var(--color-danger); 
 }
 
 .modal-footer {
@@ -379,10 +396,22 @@ table td:last-child {
     justify-content: flex-end;
     gap: var(--spacing-sm);
     padding-top: var(--spacing-sm);
-    border-top: 1px solid #f0f0f0;
+    /* Viền footer màu xám nhạt */
+    border-top: 1px solid var(--color-border);
 }
 
-/* Trạng Thái */
+/* KHẮC PHỤC LABEL VÀ INPUT */
+.form-group label {
+    color: var(--color-text-dark); 
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: white !important; 
+}
+
+/* --- Status Badges --- */
 .badge {
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
@@ -417,7 +446,7 @@ table td:last-child {
     border: 1px solid #b3e5fc;
 }
 
-/*  Alert styles  */
+/* --- Alert Styles --- */
 .alert {
     padding: var(--spacing-sm);
     border-radius: var(--radius-sm);
