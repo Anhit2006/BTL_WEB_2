@@ -55,12 +55,14 @@ export const orderAPI = {
 // Stock API
 export const stockAPI = {
   createImport: (data) => api.post('/stock/imports', data),
-  getImports: () => api.get('/stock/imports'),
+  getImports: (params = {}) => 
+    api.get('/stock/imports', { params: params }),
 };
 
 // Reports API
 export const reportAPI = {
   getCurrentStock: () => api.get('/reports/stock/current'),
+  getStockByDate: (date) => api.get('/reports/stock/date', { params: { date } }),
   getCustomerHistory: (customerId) => api.get(`/reports/customer/${customerId}/history`),
   getRevenueByDate: (date) => api.get('/reports/revenue/date', { params: { date } }),
   getTopSelling: () => api.get('/reports/top-selling'),

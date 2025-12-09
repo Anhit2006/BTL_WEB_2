@@ -75,28 +75,34 @@ const Reports = () => {
     }
   };
 
-  const loadStockByDate = async () => {
-    // Tạm thời sử dụng current stock vì API chưa có endpoint này
-    try {
-      const response = await reportAPI.getCurrentStock();
-      if (response.data.success) {
-        let stockData = response.data.data.products || [];
-        // Nếu stored procedure không trả về gia_ban, lấy từ danh sách sản phẩm
+const loadStockByDate = async () => {
+    try {
+      setLoading(true); 
+      const response = await reportAPI.getStockByDate(selectedDate);
+      if (response.data.success) {
+        let stockData = response.data.data || [];
+
+        
         if (products.length > 0) {
-          stockData = stockData.map(item => {
-            const product = products.find(p => p.ma_sp === item.ma_sp);
-            return {
-              ...item,
-              gia_ban: item.gia_ban || product?.gia_ban || 0
-            };
-          });
+            stockData = stockData.map(item => {
+                const product = products.find(p => p.ma_sp === item.ma_sp);
+                return {
+                    ...item,
+                    gia_ban: item.gia_ban || product?.gia_ban || 0,
+
+                    so_luong_ton: parseInt(item.so_luong_ton) || 0, 
+                };
+            });
         }
-        setStockByDate(stockData);
-      }
-    } catch (error) {
-      console.error('Error loading stock by date:', error);
+
+        setStockByDate(stockData);
+      }
+    } catch (error) {
+      console.error('Error loading stock by date:', error);
+    } finally {
+        setLoading(false);
     }
-  };
+  };
 
   const loadCustomers = async () => {
     try {
