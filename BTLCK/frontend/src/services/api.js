@@ -28,7 +28,7 @@ export const productAPI = {
     api.get('/products', { params: { search, showHidden } }),
   create: (data) => api.post('/products', data),
   update: (id, data) => api.put(`/products/${id}`, data),
-  toggleVisibility: (id) => api.patch(`/products/${id}/visibility`),
+  toggleVisibility: (id, data) => api.patch(`/products/${id}/visibility`, data),
   delete: (id) => api.delete(`/products/${id}`),
 };
 

@@ -28,7 +28,7 @@ const Products = () => {
   const loadProducts = async () => {
     try {
       setLoading(true);
-      const response = await productAPI.getAll(search, showHidden);
+      const response = await productAPI.getAll(search, showHidden.toString());
       if (response.data.success) {
         setProducts(response.data.data);
       }
@@ -285,13 +285,16 @@ const Products = () => {
                 <input
                   type="number"
                   min="0"
+                  disabled={!!editingProduct}
                   value={formData.so_luong_ton}
                   onChange={(e) => setFormData({ ...formData, so_luong_ton: e.target.value })}
                   placeholder="Nhập số lượng tồn kho (mặc định: 0)"
                 />
-                <small style={{ color: '#666', fontSize: '0.85rem' }}>
-                  Để trống hoặc 0 nếu chưa nhập kho
-                </small>
+                {editingProduct && (
+                  <small style={{ color: '#ff69b4', fontSize: '0.85rem' }}>
+                    Lưu ý: Không thể sửa tồn kho trực tiếp. Cập nhật qua Phiếu Nhập.
+                  </small>
+                )}
               </div>
               <div className="form-group">
                 <label>Mô Tả</label>
